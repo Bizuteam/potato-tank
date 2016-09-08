@@ -11,6 +11,8 @@ cd build
 cmake ..
 make
 sudo make install
+
+sudo apt-get install liballegro-image5-dev
 ```
 
 ### Compiler et lancer le jeu
