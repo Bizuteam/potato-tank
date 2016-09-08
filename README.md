@@ -15,7 +15,6 @@ sudo make install
 
 ## Compiler et lancer le jeu
 ```
-make al
+make
 ./al.out
 ```
-
