@@ -1,7 +1,7 @@
 # potato-tank
 Projet de Shoot'Em Up en C avec Allegro
 
-## Installer Allegro
+## Installer Allegro (merci [Eresia](https://www.github.com/Eresia "Github de Eresia"))
 ```
 git clone https://github.com/liballeg/allegro5.git
 cd allegro
