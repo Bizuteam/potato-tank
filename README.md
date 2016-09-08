@@ -2,7 +2,7 @@
 Projet de Shoot'Em Up en C avec Allegro
 
 ### Installer Allegro (merci [Eresia](https://www.github.com/Eresia "Github de Eresia"))
-```sh
+```
 git clone https://github.com/liballeg/allegro5.git
 cd allegro
 git checkout 5.0
@@ -14,7 +14,9 @@ sudo make install
 ```
 
 ### Compiler et lancer le jeu
-```sh
+```
+git clone https://github.com/Bizuteam/potato-tank.git
+cd potato-tank
 make
 ./al.out
 ```
