@@ -1,5 +1,6 @@
-#include "functions.h"
-#include "bullet.h"
+#include "functions.hpp"
+#include "bullet.hpp"
+#include "Player.hpp"
 
 #define PI 3.14159265
 
@@ -15,14 +16,19 @@ int main(int argc, char **argv) {
 	ALLEGRO_DISPLAY *display = NULL;
 	ALLEGRO_EVENT_QUEUE *event_queue = NULL;
 	ALLEGRO_TIMER *timer = NULL;
-	PlayerStruct player = {.x = SCREEN_W / 2.0 - PLAYER_SIZE / 2.0, .y = SCREEN_H / 2.0 - PLAYER_SIZE / 2.0, .img = NULL};
-	player.center_x = ((int) player.x) + PLAYER_SIZE/2;
-	player.center_y = ((int) player.y) + PLAYER_SIZE/2;
+
+	int x = SCREEN_W / 2.0 - PLAYER_SIZE / 2.0, y = SCREEN_H / 2.0 - PLAYER_SIZE / 2.0;
+	int center_x = x + PLAYER_SIZE/2, center_y = y + PLAYER_SIZE/2;
+
+	Player *p = new Player(x, y, center_x, center_y, "resources/arrow.png");
+
+	PlayerStruct player = {(float) x, (float) y, center_x, center_y, NULL};
+
 	int mouse_x = SCREEN_W/2, mouse_y = 0;
 
 	BulletStruct bullet = {0, 0, 0, 0, 0, 0, 0, NULL};
-	ListBullet list;
-	int bulletId = 0;
+	// ListBullet list;
+	// int bulletId = 0;
 
 	bool keys[4] = { false, false, false, false };
 	bool doexit = false, redraw = true, shoot = false;
@@ -60,7 +66,7 @@ int main(int argc, char **argv) {
 				bullet.x = bullet.center_x - BULLET_SIZE/2;
 				bullet.y = bullet.center_y - BULLET_SIZE/2;
 
-				list_add(&list, bullet, bulletId++);
+				// list_add(&list, bullet, bulletId++);
 				// printf("%d\n", bulletId);
 			}
 

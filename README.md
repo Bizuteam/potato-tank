@@ -1,5 +1,5 @@
 # Potato Tank
-Projet de Shoot'Em Up en C avec Allegro
+Projet de Shoot'Em Up en C++ avec Allegro
 
 ### Installer Allegro (merci [Eresia](https://www.github.com/Eresia "Github de Eresia"))
 ```
