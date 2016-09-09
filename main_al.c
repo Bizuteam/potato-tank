@@ -38,7 +38,6 @@ int main(int argc, char **argv) {
 		player.center_y = player.y + PLAYER_SIZE/2;
 
 		if(redraw && al_is_event_queue_empty(event_queue)) {
-			printf("redraw");
 			redraw = false;
 
 			al_clear_to_color(al_map_rgb(50, 200, 50));
@@ -48,10 +47,11 @@ int main(int argc, char **argv) {
 			double angle = PI - atan2(x_diff, y_diff);
 
 			if(shoot) {
-				printf("shoot\n");
 				shoot = false;
 				bullet.img = al_load_bitmap("resources/arrow_red.png");
 				bullet.angle = angle;
+				bullet.diff_x = sin(bullet.angle);
+				bullet.diff_y = - cos(bullet.angle);
 				bullet.center_x = player.center_x;
 				bullet.center_y = player.center_y;
 				bullet.x = bullet.center_x - BULLET_SIZE/2;
@@ -60,10 +60,9 @@ int main(int argc, char **argv) {
 
 			al_draw_rotated_bitmap(player.img, PLAYER_SIZE/2, PLAYER_SIZE/2, player.center_x, player.center_y, angle, 0);
 
-			if(bullet.x <= SCREEN_W && bullet.y <= SCREEN_H && bullet.img != NULL) {
-				printf("bullet");
-				bullet.x += BULLET_SPEED;
-				bullet.y += BULLET_SPEED;
+			if(bullet.img != NULL && bullet.x <= SCREEN_W && bullet.x + BULLET_SIZE >= 0 && bullet.y <= SCREEN_H && bullet.y + BULLET_SIZE >= 0) {
+				bullet.x += BULLET_SPEED*bullet.diff_x;
+				bullet.y += BULLET_SPEED*bullet.diff_y;
 				bullet.center_x = bullet.x + BULLET_SIZE/2;
 				bullet.center_y = bullet.y + BULLET_SIZE/2;
 				al_draw_rotated_bitmap(bullet.img, BULLET_SIZE/2, BULLET_SIZE/2, bullet.center_x, bullet.center_y, bullet.angle, 0);
@@ -72,7 +71,6 @@ int main(int argc, char **argv) {
 				bullet.img = NULL;
 			}
 
-			printf("\n");
 			al_flip_display();
 		}
 	}

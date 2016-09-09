@@ -16,7 +16,7 @@ typedef struct {
 typedef struct {
 	float x, y;
 	int center_x, center_y;
-	int diff_x, diff_y;
+	double diff_x, diff_y;
 	double angle;
 	ALLEGRO_BITMAP *img;
 } BulletStruct;
