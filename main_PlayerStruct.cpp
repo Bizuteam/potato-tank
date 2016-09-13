@@ -1,4 +1,7 @@
 #include "functions.hpp"
+#include "Bullet.hpp"
+#include "Player.hpp"
+#include <vector>
 
 #define PI 3.141592653589793238462643383279502884L
 
@@ -21,50 +24,56 @@ int main(int argc, char **argv) {
 	int x = SCREEN_W / 2.0 - PLAYER_SIZE / 2.0, y = SCREEN_H / 2.0 - PLAYER_SIZE / 2.0;
 	int center_x = x + PLAYER_SIZE/2, center_y = y + PLAYER_SIZE/2;
 
+	PlayerStruct player = {(float) x, (float) y, center_x, center_y, NULL};
+
 	int mouse_x = SCREEN_W/2, mouse_y = 0;
+
+	// BulletStruct bullet = {0, 0, 0, 0, 0, 0, 0, NULL};
+	// ListBullet list;
+	// int bulletId = 0;
 
 	bool keys[5] = { false, false, false, false, false };
 	bool doexit = false, redraw = true, shoot = false;
 	time_point<system_clock> lastShot = system_clock::now();
 
-	initAllegro(&timer, &display, &event_queue);
+	initAllegro(&timer, &display, &(player.img), &event_queue);
 
-	Player *player = new Player(x, y, center_x, center_y, "resources/arrow.png");
-	Bullet *bullet = new Bullet(player->center_x, player->center_y, 0, "resources/arrow_green.png");
+	Player *p = new Player(x, y, center_x, center_y, "resources/arrow.png");
+	Bullet *bullet = new Bullet(player.center_x, player.center_y, 0, "resources/arrow_green.png");
 
 	vector<Bullet> bulletList;
 
-	al_draw_bitmap(player->img, player->x, player->y, 0);
+	al_draw_bitmap(player.img, player.x, player.y, 0);
 	al_flip_display();
 
 	al_start_timer(timer);
 
 	while(!doexit) {
-		handleEvents(&doexit, &redraw, &shoot, &lastShot, keys, &event_queue, player, &mouse_x, &mouse_y);
+		handleEvents(&doexit, &redraw, &shoot, &lastShot, keys, &event_queue, &player, &mouse_x, &mouse_y);
 
-		player->center_x = player->x + PLAYER_SIZE/2;
-		player->center_y = player->y + PLAYER_SIZE/2;
+		player.center_x = player.x + PLAYER_SIZE/2;
+		player.center_y = player.y + PLAYER_SIZE/2;
 
 		if(redraw && al_is_event_queue_empty(event_queue)) {
 			redraw = false;
 
 			al_clear_to_color(al_map_rgb(200, 200, 200));
 
-			int x_diff = mouse_x - player->center_x;
-			int y_diff = mouse_y - player->center_y;
+			int x_diff = mouse_x - player.center_x;
+			int y_diff = mouse_y - player.center_y;
 			double angle = PI - atan2(x_diff, y_diff);
 
 			if(shoot) {
 				shoot = false;
 
-				bullet->setCenterX(player->center_x);
-				bullet->setCenterY(player->center_y);
+				bullet->setCenterX(player.center_x);
+				bullet->setCenterY(player.center_y);
 				bullet->setAngle(angle);
 
 				bulletList.push_back(*bullet);
 			}
 
-			al_draw_rotated_bitmap(player->img, PLAYER_SIZE/2, PLAYER_SIZE/2, player->center_x, player->center_y, angle, 0);
+			al_draw_rotated_bitmap(player.img, PLAYER_SIZE/2, PLAYER_SIZE/2, player.center_x, player.center_y, angle, 0);
 
 			int i = 0;
 			vector<int> deletions;
@@ -93,12 +102,15 @@ int main(int argc, char **argv) {
 		}
 	}
 
-	endAllegro(&timer, &display, &(player->img), &event_queue);
+	// al_destroy_bitmap(bullet.img);
+	// al_destroy_bitmap(bullet->img);
+	// delete bullet;
+	endAllegro(&timer, &display, &(player.img), &event_queue);
 
 	return 0;
 }
 
-void initAllegro(ALLEGRO_TIMER **timer, ALLEGRO_DISPLAY **display, ALLEGRO_EVENT_QUEUE **event_queue) {
+void initAllegro(ALLEGRO_TIMER **timer, ALLEGRO_DISPLAY **display, ALLEGRO_BITMAP **img, ALLEGRO_EVENT_QUEUE **event_queue) {
 	if(!al_init()) {
 		fprintf(stderr, "failed to initialize allegro!\n");
 		exit(-1);
@@ -133,9 +145,18 @@ void initAllegro(ALLEGRO_TIMER **timer, ALLEGRO_DISPLAY **display, ALLEGRO_EVENT
 	}
 	al_set_window_title(*display, "Potato Tank");
 
+	*img = al_load_bitmap("resources/arrow.png");
+	if(!*img) {
+		fprintf(stderr, "failed to load player bitmap!\n");
+		al_destroy_display(*display);
+		al_destroy_timer(*timer);
+		exit(-1);
+	}
+
 	*event_queue = al_create_event_queue();
 	if(!*event_queue) {
 		fprintf(stderr, "failed to create event_queue!\n");
+		al_destroy_bitmap(*img);
 		al_destroy_display(*display);
 		al_destroy_timer(*timer);
 		exit(-1);
@@ -154,7 +175,7 @@ void endAllegro(ALLEGRO_TIMER **timer, ALLEGRO_DISPLAY **display, ALLEGRO_BITMAP
 	al_destroy_event_queue(*event_queue);
 }
 
-void handleEvents(bool *doexit, bool *redraw, bool *shoot, time_point<system_clock> *lastShot, bool keys[], ALLEGRO_EVENT_QUEUE **event_queue, Player *player, int *mouse_x, int *mouse_y) {
+void handleEvents(bool *doexit, bool *redraw, bool *shoot, time_point<system_clock> *lastShot, bool keys[], ALLEGRO_EVENT_QUEUE **event_queue, PlayerStruct *player, int *mouse_x, int *mouse_y) {
 	ALLEGRO_EVENT ev;
 	al_wait_for_event(*event_queue, &ev);
 
@@ -208,7 +229,8 @@ void handleEvents(bool *doexit, bool *redraw, bool *shoot, time_point<system_clo
 	else if(ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
 		switch(ev.mouse.button) {
 			case 1:
-			// Left button
+			// *shoot = true;
+			// *redraw = true;
 			keys[MOUSE_LEFT] = true;
 			break;
 		}
@@ -216,7 +238,8 @@ void handleEvents(bool *doexit, bool *redraw, bool *shoot, time_point<system_clo
 	else if(ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
 		switch(ev.mouse.button) {
 			case 1:
-			// Left button
+			// *shoot = true;
+			// *redraw = true;
 			keys[MOUSE_LEFT] = false;
 			break;
 		}

@@ -1,5 +1,5 @@
-#ifndef BULLET_HPP
-#define BULLET_HPP
+#ifndef DEF_BULLET
+#define DEF_BULLET
 
 #include <iostream>
 #include <cmath>
@@ -18,7 +18,7 @@ private:
 
 public:
 	Bullet(float center_x, float center_y, double angle, string imgPath);
-	
+
 	void setCenterX(float center_x);
 	void setCenterY(float center_y);
 	void setAngle(double angle);
