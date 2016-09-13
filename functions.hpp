@@ -1,13 +1,14 @@
-#ifndef FUNCTIONS_H
-#define FUNCTIONS_H
+#ifndef FUNCTIONS_HPP
+#define FUNCTIONS_HPP
 
-#include <stdio.h>
-#include <math.h>
+#include <iostream>
+#include <cmath>
+#include <chrono>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
 
 enum enum_keys {
-	KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT
+	KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT, MOUSE_LEFT
 };
 
 typedef struct {
@@ -18,6 +19,6 @@ typedef struct {
 
 void initAllegro(ALLEGRO_TIMER **timer, ALLEGRO_DISPLAY **display, ALLEGRO_BITMAP **img, ALLEGRO_EVENT_QUEUE **event_queue);
 void endAllegro(ALLEGRO_TIMER **timer, ALLEGRO_DISPLAY **display, ALLEGRO_BITMAP **img, ALLEGRO_EVENT_QUEUE **event_queue);
-void handleEvents(bool *doexit, bool *redraw, bool *shoot, bool keys[], ALLEGRO_EVENT_QUEUE **event_queue, PlayerStruct *player, int *mouse_x, int *mouse_y);
+void handleEvents(bool *doexit, bool *redraw, bool *shoot, std::chrono::time_point<std::chrono::system_clock> *lastShot, bool keys[], ALLEGRO_EVENT_QUEUE **event_queue, PlayerStruct *player, int *mouse_x, int *mouse_y);
 
 #endif

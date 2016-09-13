@@ -3,7 +3,7 @@ CFLAGS = -Wall -pedantic -std=c++11
 LDFLAGS = -lm `pkg-config --libs allegro-5.0 allegro_main-5.0 allegro_image-5.0`
 
 #OBJS specifies which files to compile as part of the project
-OBJS_AL = main.cpp bullet.cpp Player.cpp
+OBJS_AL = main.cpp Bullet.cpp Player.cpp
 
 #OBJ_NAME specifies the name of our exectuable
 OBJ_AL_NAME = al.out
