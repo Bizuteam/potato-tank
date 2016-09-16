@@ -10,6 +10,8 @@
 #include "Player.hpp"
 #include "Bullet.hpp"
 
+#define PI 3.141592653589793238462643383279502884L
+
 enum enum_keys {
 	KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT, MOUSE_LEFT
 };

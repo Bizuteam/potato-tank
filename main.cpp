@@ -1,7 +1,5 @@
 #include "functions.hpp"
 
-#define PI 3.141592653589793238462643383279502884L
-
 using namespace std;
 using namespace std::chrono;
 
