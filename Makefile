@@ -6,7 +6,7 @@ LDFLAGS = -lm `pkg-config --libs allegro-5.0 allegro_main-5.0 allegro_image-5.0`
 OBJS_AL = main.cpp Bullet.cpp Player.cpp
 
 #OBJ_NAME specifies the name of our exectuable
-OBJ_AL_NAME = al.out
+OBJ_AL_NAME = potato-tank.out
 
 #This is the target that compiles our executable
 all: $(OBJS_AL)
