@@ -15,7 +15,7 @@ enum enum_keys {
 };
 
 void initAllegro(ALLEGRO_TIMER **timer, ALLEGRO_DISPLAY **display, ALLEGRO_EVENT_QUEUE **event_queue);
-void endAllegro(ALLEGRO_TIMER **timer, ALLEGRO_DISPLAY **display, ALLEGRO_BITMAP **img, ALLEGRO_EVENT_QUEUE **event_queue);
+void endAllegro(ALLEGRO_TIMER **timer, ALLEGRO_DISPLAY **display, ALLEGRO_EVENT_QUEUE **event_queue);
 void handleEvents(bool *doexit, bool *redraw, bool *shoot, std::chrono::time_point<std::chrono::system_clock> *lastShot, bool keys[], ALLEGRO_EVENT_QUEUE **event_queue, Player *player, int *mouse_x, int *mouse_y);
 
 #endif

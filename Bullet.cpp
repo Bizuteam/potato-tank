@@ -1,6 +1,6 @@
 #include "Bullet.hpp"
 
-Bullet::Bullet(float center_x, float center_y, double angle, string imgPath) {
+Bullet::Bullet(int center_x, int center_y, double angle, string imgPath) {
 	this->center_x = center_x;
 	this->center_y = center_y;
 	if(imgPath != "") {
