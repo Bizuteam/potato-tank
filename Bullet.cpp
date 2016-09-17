@@ -1,6 +1,6 @@
 #include "Bullet.hpp"
 
-Bullet::Bullet(int center_x, int center_y, double angle, string imgPath) {
+Bullet::Bullet(float center_x, float center_y, double angle, string imgPath) {
 	this->center_x = center_x;
 	this->center_y = center_y;
 	if(imgPath != "") {
@@ -57,11 +57,11 @@ float Bullet::getY() {
 	return y;
 }
 
-int Bullet::getCenterX() {
+float Bullet::getCenterX() {
 	return center_x;
 }
 
-int Bullet::getCenterY() {
+float Bullet::getCenterY() {
 	return center_y;
 }
 

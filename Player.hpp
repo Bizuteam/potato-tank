@@ -10,12 +10,12 @@ using namespace std;
 class Player {
 private:
 	float x, y;
-	int center_x, center_y;
+	float center_x, center_y;
 	ALLEGRO_BITMAP *img;
 	int imgWidth, imgHeight;
 
 public:
-	Player(int center_x, int center_y, std::string imgPath);
+	Player(float center_x, float center_y, std::string imgPath);
 
 	void setCenterX(float center_x);
 	void setCenterY(float center_y);
@@ -23,8 +23,8 @@ public:
 
 	float getX();
 	float getY();
-	int getCenterX();
-	int getCenterY();
+	float getCenterX();
+	float getCenterY();
 	ALLEGRO_BITMAP *getImg();
 	int getImgWidth();
 	int getImgHeight();

@@ -10,14 +10,14 @@ using namespace std;
 class Bullet {
 private:
 	float x, y;
-	int center_x, center_y;
+	float center_x, center_y;
 	double diff_x, diff_y;
 	double angle;
 	ALLEGRO_BITMAP *img;
 	int imgWidth, imgHeight;
 
 public:
-	Bullet(int center_x, int center_y, double angle, string imgPath);
+	Bullet(float center_x, float center_y, double angle, string imgPath);
 
 	void setCenterX(float center_x);
 	void setCenterY(float center_y);
@@ -26,8 +26,8 @@ public:
 
 	float getX();
 	float getY();
-	int getCenterX();
-	int getCenterY();
+	float getCenterX();
+	float getCenterY();
 	float getDiffX();
 	float getDiffY();
 	double getAngle();

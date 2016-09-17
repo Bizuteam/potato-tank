@@ -9,6 +9,7 @@
 #include <allegro5/allegro_image.h>
 #include "Player.hpp"
 #include "Bullet.hpp"
+#include "Map.hpp"
 
 #define PI 3.141592653589793238462643383279502884L
 

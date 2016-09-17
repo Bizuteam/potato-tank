@@ -1,6 +1,6 @@
 #include "Player.hpp"
 
-Player::Player(int center_x, int center_y, std::string imgPath) {
+Player::Player(float center_x, float center_y, std::string imgPath) {
 	this->center_x = center_x;
 	this->center_y = center_y;
 	if(imgPath != "") {
@@ -48,11 +48,11 @@ float Player::getY() {
 	return y;
 }
 
-int Player::getCenterX() {
+float Player::getCenterX() {
 	return center_x;
 }
 
-int Player::getCenterY() {
+float Player::getCenterY() {
 	return center_y;
 }
 

@@ -4,8 +4,8 @@ using namespace std;
 using namespace std::chrono;
 
 const float FPS = 60;
-const int SCREEN_W = 1100;
-const int SCREEN_H = 900;
+const int SCREEN_W = 1120;
+const int SCREEN_H = 800;
 const int PLAYER_SPEED = 2;
 const int BULLET_SPEED = 7;
 const double FIRE_RATE = 6;
@@ -23,10 +23,12 @@ int main(int argc, char **argv) {
 
 	initAllegro(&timer, &display, &event_queue);
 
-	Player *player = new Player(SCREEN_W / 2, SCREEN_H / 2, "resources/arrow.png");
-	Bullet *bullet = new Bullet(player->getCenterX(), player->getCenterY(), 0, "resources/arrow_green.png");
-
+	Player *player = new Player(SCREEN_W / 2, SCREEN_H / 2, "resources/potato-30x20.png");
+	Bullet *bullet = new Bullet(player->getCenterX(), player->getCenterY(), 0, "resources/bullet-15x5.png");
 	vector<Bullet> bulletList;
+
+	Map *map = new Map("resources/main.map");
+	// map->displayTerm();
 
 	al_draw_bitmap(player->getImg(), player->getX(), player->getY(), 0);
 	al_flip_display();
@@ -39,7 +41,9 @@ int main(int argc, char **argv) {
 		if(redraw && al_is_event_queue_empty(event_queue)) {
 			redraw = false;
 
-			al_clear_to_color(al_map_rgb(200, 200, 200));
+			// map->displayAllegro();
+			al_draw_bitmap(map->getMapImg(), 0, 0, 0);
+			// al_clear_to_color(al_map_rgb(200, 200, 200));
 
 			int x_diff = mouse_x - player->getCenterX();
 			int y_diff = mouse_y - player->getCenterY();
