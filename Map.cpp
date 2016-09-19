@@ -18,8 +18,8 @@ Map::Map(string filename) {
 
 	mapImg = al_load_bitmap("resources/map.png");
 
-	// grassImg = al_load_bitmap("resources/grassImg.png");
-	// rockImg = al_load_bitmap("resources/rockImg.png");
+	grassImg = al_load_bitmap("resources/grassImg.png");
+	rockImg = al_load_bitmap("resources/rockImg.png");
 }
 
 ALLEGRO_BITMAP *Map::getMapImg() {
@@ -37,22 +37,22 @@ void Map::displayTerm() {
 	}
 }
 
-// void Map::displayAllegro() {
-// 	int line, col;
-//
-// 	for(line = 0 ; line < 50 ; line ++) {
-// 		for(col = 0 ; col < 70 ; col ++) {
-// 			al_draw_bitmap(getImgFromChar(charArray[col][line]), col*16, line*16, 0);
-// 		}
-// 	}
-// }
+void Map::displayAllegro() {
+	int line, col;
 
-// ALLEGRO_BITMAP *Map::getImgFromChar(char c) {
-// 	switch(c) {
-// 		case 'G':
-// 			return grassImg;
-// 		case 'R':
-// 			return rockImg;
-// 	}
-// 	return NULL;
-// }
+	for(line = 0 ; line < 50 ; line ++) {
+		for(col = 0 ; col < 70 ; col ++) {
+			al_draw_bitmap(getImgFromChar(charArray[col][line]), col*16, line*16, 0);
+		}
+	}
+}
+
+ALLEGRO_BITMAP *Map::getImgFromChar(char c) {
+	switch(c) {
+		case 'G':
+			return grassImg;
+		case 'R':
+			return rockImg;
+	}
+	return NULL;
+}

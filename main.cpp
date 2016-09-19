@@ -10,6 +10,11 @@ const int PLAYER_SPEED = 2;
 const int BULLET_SPEED = 7;
 const double FIRE_RATE = 6;
 
+/** TODO
+* dans Map : fonction pour redraw les images de sol sur seulement partie demandée (x, y, width, height)
+* Essayer d'utiliser al_save_bitmap(_f ?) au démarrage pour ensuite charger cette image comme carte
+*/
+
 int main(int argc, char **argv) {
 	ALLEGRO_DISPLAY *display = NULL;
 	ALLEGRO_EVENT_QUEUE *event_queue = NULL;
@@ -41,9 +46,9 @@ int main(int argc, char **argv) {
 		if(redraw && al_is_event_queue_empty(event_queue)) {
 			redraw = false;
 
+			// al_clear_to_color(al_map_rgb(200, 200, 200));
 			// map->displayAllegro();
 			al_draw_bitmap(map->getMapImg(), 0, 0, 0);
-			// al_clear_to_color(al_map_rgb(200, 200, 200));
 
 			int x_diff = mouse_x - player->getCenterX();
 			int y_diff = mouse_y - player->getCenterY();
@@ -65,8 +70,11 @@ int main(int argc, char **argv) {
 				Bullet b = *it;
 
 				if(b.getImg() != NULL && b.getX() <= SCREEN_W && b.getX() + b.getImgWidth()/2 >= 0 && b.getY() <= SCREEN_H && b.getY() + b.getImgHeight()/2 >= 0) {
+					// al_set_clipping_rectangle(b.getX(), b.getY(), b.getImgWidth(), b.getImgHeight());
+					// al_clear_to_color(al_map_rgb(200, 200, 200));
 					b.setCenterX(b.getCenterX() + BULLET_SPEED*b.getDiffX());
 					b.setCenterY(b.getCenterY() + BULLET_SPEED*b.getDiffY());
+					// al_clear_bitmap();
 					al_draw_rotated_bitmap(b.getImg(), b.getImgWidth()/2, b.getImgHeight()/2, b.getCenterX(), b.getCenterY(), b.getAngle(), 0);
 					bulletList.at(i) = b;
 				}

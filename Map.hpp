@@ -11,8 +11,8 @@ private:
 	char charArray[70][50];
 	ALLEGRO_BITMAP *mapImg;
 
-	// ALLEGRO_BITMAP *grassImg, *rockImg;
-	// ALLEGRO_BITMAP *getImgFromChar(char c);
+	ALLEGRO_BITMAP *grassImg, *rockImg;
+	ALLEGRO_BITMAP *getImgFromChar(char c);
 public:
 
 	Map(string filename);
