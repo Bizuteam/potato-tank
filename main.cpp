@@ -70,8 +70,6 @@ int main(int argc, char **argv) {
 				Bullet b = *it;
 
 				if(b.getImg() != NULL && b.getX() <= SCREEN_W && b.getX() + b.getImgWidth()/2 >= 0 && b.getY() <= SCREEN_H && b.getY() + b.getImgHeight()/2 >= 0) {
-					// al_set_clipping_rectangle(b.getX(), b.getY(), b.getImgWidth(), b.getImgHeight());
-					// al_clear_to_color(al_map_rgb(200, 200, 200));
 					b.setCenterX(b.getCenterX() + BULLET_SPEED*b.getDiffX());
 					b.setCenterY(b.getCenterY() + BULLET_SPEED*b.getDiffY());
 					// al_clear_bitmap();
