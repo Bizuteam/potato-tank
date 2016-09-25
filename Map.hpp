@@ -13,12 +13,15 @@ private:
 
 	ALLEGRO_BITMAP *grassImg, *rockImg;
 	ALLEGRO_BITMAP *getImgFromChar(char c);
-public:
 
+public:
 	Map(string filename);
 	ALLEGRO_BITMAP *getMapImg();
-	void displayAllegro();
+	void setMapImg(string imgPath);
+	void displayArray();
 	void displayTerm();
+	void redrawOver(float x, float y, int width, int height, int screenWidth, int screenHeight);
+	ALLEGRO_BITMAP *getImgFromPos(int x, int y);
 };
 
 #endif

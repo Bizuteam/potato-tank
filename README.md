@@ -20,5 +20,5 @@ sudo apt-get install liballegro-image5-dev
 git clone https://github.com/Bizuteam/potato-tank.git
 cd potato-tank
 make
-./al.out
+./potato-tank.out
 ```
